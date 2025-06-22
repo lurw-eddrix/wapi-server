@@ -1,0 +1,79 @@
+services:
+
+  waha:
+
+    restart: always
+
+    # https://waha.devlike.pro/docs/how-to/engines/#docker-images
+
+    # https://portal.devlike.pro/docker-image
+
+    image: devlikeapro/waha:latest
+
+    # WAHA Core
+
+    # image: devlikeapro/waha:latest
+
+    ports:
+
+      - '3000:3000/tcp'
+
+    volumes:
+
+      # Store sessions in the .sessions folder (comment it if you're using MongoDB)
+
+      - './sessions:/app/.sessions'
+
+      # Save media files
+
+      # https://waha.devlike.pro/docs/how-to/storages/#save-media-files-between-the-container-restarts
+
+      - './.media:/app/.media'
+
+    environment:
+
+      - WHATSAPP_API_KEY=${WHATSAPP_API_KEY}
+
+      - WAHA_DASHBOARD_USERNAME=${WAHA_DASHBOARD_USERNAME}
+
+      - WAHA_DASHBOARD_PASSWORD=${WAHA_DASHBOARD_PASSWORD}
+
+      - WAHA_DASHBOARD_ENABLED=${WAHA_DASHBOARD_ENABLED}
+
+      - WAHA_LOG_FORMAT=${WAHA_LOG_FORMAT}
+
+      - WAHA_LOG_LEVEL=${WAHA_LOG_LEVEL}
+
+      - WHATSAPP_DEFAULT_ENGINE=${WHATSAPP_DEFAULT_ENGINE}
+
+      - WAHA_PRINT_QR=${WAHA_PRINT_QR}
+
+      - WHATSAPP_SWAGGER_USERNAME=${WHATSAPP_SWAGGER_USERNAME}
+
+      - WHATSAPP_SWAGGER_PASSWORD=${WHATSAPP_SWAGGER_PASSWORD}
+
+      - WAHA_MEDIA_STORAGE=${WAHA_MEDIA_STORAGE}
+
+      - WHATSAPP_FILES_LIFETIME=${WHATSAPP_FILES_LIFETIME}
+
+      - WHATSAPP_FILES_FOLDER=${WHATSAPP_FILES_FOLDER}
+
+      - WHATSAPP_DOWNLOAD_MEDIA=${WHATSAPP_DOWNLOAD_MEDIA}
+
+      - WHATSAPP_SWAGGER_CONFIG_ADVANCED=${WHATSAPP_SWAGGER_CONFIG_ADVANCED}
+
+      #- WHATSAPP_FILES_MIMETYPES=${WHATSAPP_FILES_MIMETYPES}
+
+      - WHATSAPP_API_HOSTNAME=${WHATSAPP_API_HOSTNAME}
+
+     # - WHATSAPP_API_PORT=3000
+
+      - WAHA_BASE_URL=${WAHA_BASE_URL}
+
+volumes:
+
+  # NOTE: Only if you're using MongoDB
+
+  mongodb_data: {}
+
+  minio_data: {}
